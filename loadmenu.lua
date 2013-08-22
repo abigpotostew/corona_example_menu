@@ -6,10 +6,16 @@ local scene = storyboard.newScene()
 ---------------------------------------------------------------------------------
 local screen = nil
 
+local downloadUpdates = function( url )
+  print( "Downloading from " .. url )
+end
+
 function initializeGame()
   require 'init_buttons'
 
   math.randomseed( os.time() )
+
+  downloadUpdates( 'https://raw.github.com/radamanthus/corona_example_menu/master/app.json' )
 end
 
 function scene:createScene( event )
