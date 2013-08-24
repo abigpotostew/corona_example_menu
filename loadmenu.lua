@@ -1,13 +1,41 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
+local radlib = require( "scripts.lib.radlib" )
+
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
 local screen = nil
 
+local copyStarterContentIfNeeded = function()
+  -- copy the files only if the app.json file does not exist
+  local f = system.pathForFile( "app.json", system.CachesDirectory )
+  if not( radlib.io.fileExists( f) ) then
+    radlib.io.copyFile( "starter_content/app.json", system.ResourceDirectory, "app.json", system.CachesDirectory )
+    -- copy the image files referenced in app.json to system.CachesDirectory
+    local jsonFile = system.pathForFile( "starter_content/app.json", system.ResourceDirectory )
+    local app = radlib.io.parseJson( jsonFile )
+    for i, section in ipairs( app.sections ) do
+      for j, item in ipairs( section.items ) do
+        local thumbnailFile = system.pathForFile( "starter_content/images/" .. item.thumbnail.filename, system.ResourceDirectory )
+        if radlib.io.fileExists( f ) then
+          radlib.io.copyFile( "starter_content/images/" .. item.thumbnail.filename,
+            system.ResourceDirectory, item.thumbnail.filename, system.CachesDirectory )
+        end
+        local fullImageFile = system.pathForFile( "starter_content/images/" .. item.full_image.filename, system.ResourceDirectory )
+        if radlib.io.fileExists( fullImageFile ) then
+          radlib.io.copyFile( "starter_content/images/" .. item.full_image.filename,
+            system.ResourceDirectory, item.full_image.filename, system.CachesDirectory )
+        end
+      end
+    end
+  end
+end
+
 local downloadUpdates = function( url )
   print( "Downloading from " .. url )
+  -- delete the starter_content file
 end
 
 function initializeGame()
@@ -16,6 +44,10 @@ function initializeGame()
   math.randomseed( os.time() )
 
   downloadUpdates( 'https://raw.github.com/radamanthus/corona_example_menu/master/app.json' )
+
+  copyStarterContentIfNeeded()
+
+  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.CachesDirectory ) )
 end
 
 function scene:createScene( event )

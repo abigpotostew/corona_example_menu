@@ -1,0 +1,113 @@
+{
+  "title": "Fictional Restaurant Menu",
+  "settings": {
+  },
+  "sections": [
+    {
+      "title": "Starters",
+      "items": [
+        {
+          "title": "Croissant",
+          "price": 149.00,
+          "description": "Hard to pronounce properly, but very tasty.",
+          "thumbnail": {
+            "filename": "croissants_thumbnail.png",
+            "width": 200,
+            "height": 168
+          },
+          "full_image": {
+            "filename": "croissants.png",
+            "width": 600,
+            "height": 503
+          }
+        },
+        {
+          "title": "Sushi",
+          "price": 50.00,
+          "description": "Goes well with Miso soup",
+          "thumbnail": {
+            "filename": "sushi_thumbnail.png",
+            "width": 200,
+            "height": 133
+          },
+          "full_image": {
+            "filename": "sushi.png",
+            "width": 600,
+            "height": 398
+          }
+        }
+      ]
+    },
+    {
+      "title": "Soups",
+      "items": [
+        {
+          "title": "Fish Soup",
+          "price": 150.00,
+          "description": "Tasty fish soup",
+          "thumbnail": {
+            "filename": "fish_soup_thumbnail.png",
+            "width": 200,
+            "height": 128
+          },
+          "full_image": {
+            "filename": "fish_soup.png",
+            "width": 600,
+            "height": 383
+          }
+        },
+        {
+          "title": "Miso Soup",
+          "price": 50.00,
+          "description": "Goes well with Sushi",
+          "thumbnail": {
+            "filename": "instant_miso_soup_thumbnail.png",
+            "width": 200,
+            "height": 207
+          },
+          "full_image": {
+            "filename": "instant_miso_soup.png",
+            "width": 400,
+            "height": 413
+          }
+        }
+      ]
+    },
+    {
+      "title": "Main Dishes",
+      "items": [
+        {
+          "title": "Sunday Roast Beef",
+          "price": 150.00,
+          "description": "Best Beef for any day of the week",
+          "thumbnail": {
+            "filename": "sunday_roast_beef_thumbnail.png",
+            "width": 200,
+            "height": 133
+          },
+          "full_image": {
+            "filename": "sunday_roast_beef.png",
+            "width": 600,
+            "height": 450
+          }
+        },
+        {
+          "title": "Steak Tatar",
+          "price": 150.00,
+          "description": "Best steak, recommended for Mandaloreans",
+          "thumbnail": {
+            "filename": "steak_tatar_thumbnail.png",
+            "width": 200,
+            "height": 147
+          },
+          "full_image": {
+            "filename": "steak_tatar.png",
+            "width": 600,
+            "height": 442
+          }
+        }
+      ]
+    },
+  ]
+}
+

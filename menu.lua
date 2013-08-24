@@ -9,12 +9,16 @@ local radlib = require "scripts.lib.radlib"
 ---------------------------------------------------------------------------------
 local screen = nil
 
+local showHeader = function()
+end
+
 function scene:createScene( event )
   screen = self.view
 end
 
 function scene:enterScene( event )
-  print("Menu loaded...")
+  showHeader()
+  local sections = _G.menu.section
 end
 
 function scene:exitScene( event )

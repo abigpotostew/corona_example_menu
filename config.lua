@@ -2,8 +2,8 @@ application =
 {
   content =
   {
-    width = 320,
-    height = 480,
+    width = 768,
+    height = 1024,
     scale = "letterbox",
     imageSuffix =
     {
@@ -11,3 +11,5 @@ application =
     }
   }
 }
+
+
