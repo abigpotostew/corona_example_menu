@@ -1,10 +1,24 @@
 {
-  "title": "Fictional Restaurant Menu",
+  "title": {
+    "color": {
+      "red": 192,
+      "green": 128,
+      "blue": 192
+    },
+    "text": "MilliWays: The Restaurant at the End of the Universe"
+  },
   "settings": {
   },
   "sections": [
     {
-      "title": "Starters",
+      "title": {
+        "color": {
+          "red": 0,
+          "green": 128,
+          "blue": 32
+        },
+        "text": "Starters"
+      },
       "items": [
         {
           "title": "Croissant",
@@ -22,7 +36,14 @@
           }
         },
         {
-          "title": "Sushi",
+          "title": {
+            "color": {
+              "red": 128,
+              "green": 128,
+              "blue": 0
+            },
+            "text": "Sushi"
+          },
           "price": 50.00,
           "description": "Goes well with Miso soup",
           "thumbnail": {
@@ -39,7 +60,14 @@
       ]
     },
     {
-      "title": "Soups",
+      "title": {
+        "color": {
+          "red": 128,
+          "green": 128,
+          "blue": 64
+        },
+        "text": "Soups"
+      },
       "items": [
         {
           "title": "Fish Soup",
@@ -74,7 +102,14 @@
       ]
     },
     {
-      "title": "Main Dishes",
+      "title": {
+        "color": {
+          "red": 128,
+          "green": 128,
+          "blue": 255
+        },
+        "text": "Main Dishes"
+      },
       "items": [
         {
           "title": "Sunday Roast Beef",
@@ -107,7 +142,7 @@
           }
         }
       ]
-    },
+    }
   ]
 }
 

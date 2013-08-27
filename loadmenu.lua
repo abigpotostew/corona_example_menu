@@ -19,7 +19,7 @@ local copyStarterContentIfNeeded = function()
     for i, section in ipairs( app.sections ) do
       for j, item in ipairs( section.items ) do
         local thumbnailFile = system.pathForFile( "starter_content/images/" .. item.thumbnail.filename, system.ResourceDirectory )
-        if radlib.io.fileExists( f ) then
+        if radlib.io.fileExists( thumbnailFile ) then
           radlib.io.copyFile( "starter_content/images/" .. item.thumbnail.filename,
             system.ResourceDirectory, item.thumbnail.filename, system.CachesDirectory )
         end
