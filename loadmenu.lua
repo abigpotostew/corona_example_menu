@@ -10,10 +10,11 @@ local screen = nil
 
 local copyStarterContentIfNeeded = function()
   -- copy the files only if the app.json file does not exist
-  local f = system.pathForFile( "app.json", system.CachesDirectory )
+  local f = system.pathForFile( "app.json", system.DocumentsDirectory )
   if not( radlib.io.fileExists( f) ) then
-    radlib.io.copyFile( "starter_content/app.json", system.ResourceDirectory, "app.json", system.CachesDirectory )
-    -- copy the image files referenced in app.json to system.CachesDirectory
+    print("copying...")
+    radlib.io.copyFile( "starter_content/app.json", system.ResourceDirectory, "app.json", system.DocumentsDirectory )
+    -- copy the image files referenced in app.json to system.DocumentsDirectory
     local jsonFile = system.pathForFile( "starter_content/app.json", system.ResourceDirectory )
     local app = radlib.io.parseJson( jsonFile )
     for i, section in ipairs( app.sections ) do
@@ -21,12 +22,12 @@ local copyStarterContentIfNeeded = function()
         local thumbnailFile = system.pathForFile( "starter_content/images/" .. item.thumbnail.filename, system.ResourceDirectory )
         if radlib.io.fileExists( thumbnailFile ) then
           radlib.io.copyFile( "starter_content/images/" .. item.thumbnail.filename,
-            system.ResourceDirectory, item.thumbnail.filename, system.CachesDirectory )
+            system.ResourceDirectory, item.thumbnail.filename, system.DocumentsDirectory )
         end
         local fullImageFile = system.pathForFile( "starter_content/images/" .. item.full_image.filename, system.ResourceDirectory )
         if radlib.io.fileExists( fullImageFile ) then
           radlib.io.copyFile( "starter_content/images/" .. item.full_image.filename,
-            system.ResourceDirectory, item.full_image.filename, system.CachesDirectory )
+            system.ResourceDirectory, item.full_image.filename, system.DocumentsDirectory )
         end
       end
     end
@@ -47,7 +48,7 @@ function initializeGame()
 
   copyStarterContentIfNeeded()
 
-  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.CachesDirectory ) )
+  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
 end
 
 function scene:createScene( event )

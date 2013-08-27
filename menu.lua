@@ -38,18 +38,15 @@ local renderSectionItems = function( section, sectionIndex )
   item1 = section.items[1]
   item2 = section.items[2]
 
-  --local img1Filename = system.pathForFile( item1.thumbnail.filename, system.CachesDirectory )
-  local img1Filename = "starter_content/images/" .. item1.thumbnail.filename
-  local img1 = display.newImageRect( img1Filename, item1.thumbnail.width, item1.thumbnail.height )
+  local img1 = display.newImageRect( item1.thumbnail.filename, system.DocumentsDirectory, item1.thumbnail.width, item1.thumbnail.height )
   img1.x = 202
   img1.y = 120 + ((sectionIndex-1) * 316) + img1.height/2
   screen:insert( img1 )
 
-  local img2Filename = "starter_content/images/" .. item2.thumbnail.filename
-  local img2 = display.newImageRect( img1Filename, item2.thumbnail.width, item2.thumbnail.height )
+  local img2 = display.newImageRect( item2.thumbnail.filename, system.DocumentsDirectory, item2.thumbnail.width, item2.thumbnail.height )
   img2.x = 586
   img2.y = 120 + ((sectionIndex-1) * 316) + img2.height/2
-  screen:insert( img1 )
+  screen:insert( img2 )
 
 end
 
