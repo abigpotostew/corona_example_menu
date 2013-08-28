@@ -1,24 +1,26 @@
 {
-  "title": {
-    "color": {
-      "red": 192,
-      "green": 128,
-      "blue": 192
+  "theme": {
+    "title": {
+      "color": {
+        "red": 192,
+        "green": 128,
+        "blue": 192
+      },
+      "font": "AmericanTypewriter-Bold",
     },
-    "text": "MilliWays: The Restaurant at the End of the Universe"
+    "body": {
+      "color": {
+        "red": 192,
+        "green": 128,
+        "blue": 192
+      },
+      "font": "AmericanTypewriter-Condensed",
+    }
   },
-  "settings": {
-  },
+  "title": "MilliWays: The Restaurant at the End of the Universe",
   "sections": [
     {
-      "title": {
-        "color": {
-          "red": 0,
-          "green": 128,
-          "blue": 32
-        },
-        "text": "Starters"
-      },
+      "title": "Starters",
       "items": [
         {
           "title": "Croissant",
@@ -36,14 +38,7 @@
           }
         },
         {
-          "title": {
-            "color": {
-              "red": 128,
-              "green": 128,
-              "blue": 0
-            },
-            "text": "Sushi"
-          },
+          "title": "Sushi",
           "price": 50.00,
           "description": "Goes well with Miso soup",
           "thumbnail": {
@@ -60,14 +55,7 @@
       ]
     },
     {
-      "title": {
-        "color": {
-          "red": 128,
-          "green": 128,
-          "blue": 64
-        },
-        "text": "Soups"
-      },
+      "title": "Soups",
       "items": [
         {
           "title": "Fish Soup",
@@ -102,14 +90,7 @@
       ]
     },
     {
-      "title": {
-        "color": {
-          "red": 128,
-          "green": 128,
-          "blue": 255
-        },
-        "text": "Main Dishes"
-      },
+      "title": "Main Dishes",
       "items": [
         {
           "title": "Sunday Roast Beef",
