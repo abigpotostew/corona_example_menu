@@ -44,8 +44,9 @@ end
 
 local flagImageDownloadDone = function( event )
   if "ended" == event.phase then
-    print( "Done downloading " .. event.response.filename )
-    if downloadedImages == imagesToDownload then
+    downloadedImages = downloadedImages + 1
+    print( "Downloaded an image! Total images downloaded: " .. downloadedImages )
+    if downloadedImages >= imagesToDownload then
       showMenu()
     end
   end
@@ -54,8 +55,11 @@ end
 local downloadUpatedImages = function( updatedImages )
   downloadedImages = 0
   imagesToDownload = #updatedImages
-  for i, imageFilename in updatedImages do
-    network.download( url, "GET", flagImageDownloadDone, {}, "images/" .. imageFilename, system.DocumentsDirectory )
+  local url = ''
+  for i, imageFilename in ipairs(updatedImages) do
+    url = DOWNLOAD_BASE_URL .. "images/" .. imageFilename
+    print("Downloading " .. url)
+    network.download( url, "GET", flagImageDownloadDone, {}, imageFilename, system.DocumentsDirectory )
   end
 end
 
