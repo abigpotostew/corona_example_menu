@@ -6,6 +6,7 @@ local radlib = require( "scripts.lib.radlib" )
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
+local DOWNLOAD_BASE_URL = "https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/"
 local screen = nil
 
 local copyStarterContentIfNeeded = function()
@@ -36,8 +37,19 @@ end
 
 local doneListener = function( event )
   if ( "ended" == event.phase ) then
-    print("Done!")
-    radlib.io.copyFile( "app.json", system.TemporaryDirectory, "app.json", system.DocumentsDirectory )
+    print("Done downloading latest app.json")
+
+    local newAppJson = radlib.io.parseJson( system.pathForFile( "app.json", system.TemporaryDirectory ) )
+    local currentAppJson = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+    print("New version: " .. newAppJson.version )
+    print("Old version: " .. currentAppJson.version )
+    if newAppJson.version ~= currentAppJson.version then
+      print("New version!")
+      radlib.io.copyFile( "app.json", system.TemporaryDirectory, "app.json", system.DocumentsDirectory )
+    end
+    copyStarterContentIfNeeded()
+    _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+    storyboard.gotoScene( "menu" )
   end
 end
 
@@ -51,11 +63,7 @@ function initializeGame()
 
   math.randomseed( os.time() )
 
-  downloadUpdates( 'https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/app.json' )
-
-  copyStarterContentIfNeeded()
-
-  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+  downloadUpdates( DOWNLOAD_BASE_URL .. 'app.json' )
 end
 
 function scene:createScene( event )
@@ -66,13 +74,7 @@ function scene:createScene( event )
   loadingImage.y = display.contentHeight/2
   screen:insert(loadingImage)
 
-  local gotoMainMenu = function()
-    storyboard.gotoScene( "menu" )
-  end
-
   initializeGame()
-
-  local loadMenuTimer = timer.performWithDelay( 1000, gotoMainMenu, 1 )
 end
 
 function scene:enterScene( event )
