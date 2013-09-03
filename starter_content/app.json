@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "updatedImages": [
+    "croissants_thumbnail.png",
+    "croissants.png"
+  ],
   "theme": {
     "title": {
       "color": {

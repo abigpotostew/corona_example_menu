@@ -8,12 +8,14 @@ local radlib = require( "scripts.lib.radlib" )
 ---------------------------------------------------------------------------------
 local DOWNLOAD_BASE_URL = "https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/"
 local screen = nil
+local downloadedImages = 0
+local imagesToDownload = 0
 
 local copyStarterContentIfNeeded = function()
   -- copy the files only if the app.json file does not exist
   local f = system.pathForFile( "app.json", system.DocumentsDirectory )
   if not( radlib.io.fileExists( f) ) then
-    print("copying...")
+    print("copying starter content...")
     radlib.io.copyFile( "starter_content/app.json", system.ResourceDirectory, "app.json", system.DocumentsDirectory )
     -- copy the image files referenced in app.json to system.DocumentsDirectory
     local jsonFile = system.pathForFile( "starter_content/app.json", system.ResourceDirectory )
@@ -35,6 +37,28 @@ local copyStarterContentIfNeeded = function()
   end
 end
 
+local showMenu = function()
+  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+  storyboard.gotoScene( "menu" )
+end
+
+local flagImageDownloadDone = function( event )
+  if "ended" == event.phase then
+    print( "Done downloading " .. event.response.filename )
+    if downloadedImages == imagesToDownload then
+      showMenu()
+    end
+  end
+end
+
+local downloadUpatedImages = function( updatedImages )
+  downloadedImages = 0
+  imagesToDownload = #updatedImages
+  for i, imageFilename in updatedImages do
+    network.download( url, "GET", flagImageDownloadDone, {}, "images/" .. imageFilename, system.DocumentsDirectory )
+  end
+end
+
 local doneListener = function( event )
   if ( "ended" == event.phase ) then
     print("Done downloading latest app.json")
@@ -46,10 +70,10 @@ local doneListener = function( event )
     if newAppJson.version ~= currentAppJson.version then
       print("New version!")
       radlib.io.copyFile( "app.json", system.TemporaryDirectory, "app.json", system.DocumentsDirectory )
+      downloadUpatedImages( newAppJson.updatedImages )
+    else
+      showMenu()
     end
-    copyStarterContentIfNeeded()
-    _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
-    storyboard.gotoScene( "menu" )
   end
 end
 
@@ -63,7 +87,16 @@ function initializeGame()
 
   math.randomseed( os.time() )
 
-  downloadUpdates( DOWNLOAD_BASE_URL .. 'app.json' )
+  copyStarterContentIfNeeded()
+
+  if radlib.net.hasNetworkConnection( 'www.google.com', 80 ) then
+    print( "Network connection detected, checking for updates..." )
+    downloadUpdates( DOWNLOAD_BASE_URL .. 'app.json' )
+  else
+    print( "No network, using locally cached content..." )
+    _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+    storyboard.gotoScene( "menu" )
+  end
 end
 
 function scene:createScene( event )
