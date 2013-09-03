@@ -34,9 +34,16 @@ local copyStarterContentIfNeeded = function()
   end
 end
 
+local doneListener = function( event )
+  if ( "ended" == event.phase ) then
+    print("Done!")
+    radlib.io.copyFile( "app.json", system.TemporaryDirectory, "app.json", system.DocumentsDirectory )
+  end
+end
+
 local downloadUpdates = function( url )
   print( "Downloading from " .. url )
-  -- delete the starter_content file
+  network.download( url, "GET", doneListener, {}, "app.json", system.TemporaryDirectory )
 end
 
 function initializeGame()
@@ -44,7 +51,7 @@ function initializeGame()
 
   math.randomseed( os.time() )
 
-  downloadUpdates( 'https://raw.github.com/radamanthus/corona_example_menu/master/app.json' )
+  downloadUpdates( 'https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/app.json' )
 
   copyStarterContentIfNeeded()
 
