@@ -1,5 +1,6 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local widget = require( "widget" )
 
 local radlib = require( "scripts.lib.radlib" )
 
@@ -10,6 +11,7 @@ local DOWNLOAD_BASE_URL = "https://raw.github.com/radamanthus/corona_example_men
 local screen = nil
 local downloadedImages = 0
 local imagesToDownload = 0
+local progressWidget = nil
 
 local copyStarterContentIfNeeded = function()
   -- copy the files only if the app.json file does not exist
@@ -46,6 +48,9 @@ local flagImageDownloadDone = function( event )
   if "ended" == event.phase then
     downloadedImages = downloadedImages + 1
     print( "Downloaded an image! Total images downloaded: " .. downloadedImages )
+    local percentDone = math.ceil( 100 * downloadedImages / imagesToDownload )
+    print( "Percent done: " .. percentDone .. "%" )
+    progressWidget:setProgress( downloadedImages / imagesToDownload )
     if downloadedImages >= imagesToDownload then
       showMenu()
     end
@@ -82,6 +87,10 @@ local doneListener = function( event )
 end
 
 local downloadUpdates = function( url )
+  progressWidget = widget.newProgressView({
+    left = 100, top = 450, width = 568, isAnimated = true
+  })
+  screen:insert( progressWidget )
   print( "Downloading from " .. url )
   network.download( url, "GET", doneListener, {}, "app.json", system.TemporaryDirectory )
 end
