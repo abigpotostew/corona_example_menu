@@ -1,23 +1,25 @@
-This is a template project for building a Corona app that can update its assets from the Internet.
-It also demonstrates how to use Storyboard popups.
+This is a template project for building games and apps using [Corona SDK](http://www.coronalabs.com)
 
-The app is a menu app for a fictional restaurant. There are three sections: Starters, Soups, and Main Dishes. There are two items under each section. Clicking on a picture shows a popup that provides more details for the selected menu item.
+This project was originally corona-game-template. Because it is generic enough to be used for business apps too, it has been renamed to Corona Application Template, or CAT for short, a.k.a. Muning. Muning is a common Filipino name for a cat.
 
 # Usage
 
-To customize your app's starter content, modify starter_content/app.json and replace the images in starter_content/images.
-app.json is the asset manifest file that contains the list and the URLs of your app assets.
+Out of the box, this is a working Corona project. It includes a splash screen (loadmenu.lua) which displays images/splash_screen.png for 1 second and then displays the main menu (menu.lua) with the following buttons:
+- Start
+- Settings
+- Help
+- About
 
-To customize the URL from which the app downloads updates, modify the call to downloadUpdates() in the initializeGame function in loadmenu.lua.
+Note the naming convention for button images:
+The buttons for Play are btn_play.png and btn_play_over.png; the buttons for Settings are btn_settings.png and btn_settings_over.png, etc.
+
+If you have Ruby 1.9.3 installed, my Ruby gem [nakor](http://github.com/radamanthus/nakor) provides an easy command-line interface to generating apps from this template.
 
 # Credits
 
 This code is MIT licensed, see http://developer.coronalabs.com/code/license
 
-The sample images are from Wikimedia:
-sushi.png - http://commons.wikimedia.org/wiki/File:Sushi_appetizer.jpg
-croissants.png - http://commons.wikimedia.org/wiki/File:Croissants-2.jpg
-fish_soup.png - http://commons.wikimedia.org/wiki/File:Riblja_juha_Ck_0608.jpg
-miso_soup.png - http://commons.wikimedia.org/wiki/File:Instant_miso_soup.jpg
-sunday_roast_beef.png - http://commons.wikimedia.org/wiki/File:Sunday_roast_-_roast_beef_1.jpg
-steak_tatar.png - http://commons.wikimedia.org/wiki/File:Tatar-1.jpg
+It incorporates these Lua libraries:
+radlib (from the author) - https://github.com/radamanthus/radlib
+GGSound (Glitch Games) - https://github.com/GlitchGames/GGSound
+GGMusic (Glitch Music) - https://github.com/GlitchGames/GGMusic

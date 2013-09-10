@@ -43,12 +43,7 @@ M.copyFile = copyFile
 -- Taken from http://stackoverflow.com/questions/4990990/lua-check-if-a-file-exists
 local fileExists = function( filename )
   local f = io.open( filename, "r" )
-  if f ~= nil then
-    io.close( f )
-    return true
-  else
-    return false
-  end
+  if f ~= nil then io.close( f ) return true else return false end
 end
 M.fileExists = fileExists
 

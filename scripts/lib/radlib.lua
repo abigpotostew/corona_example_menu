@@ -9,7 +9,7 @@ local ioExt = require "scripts.lib.io_ext"
 M.io = ioExt
 
 local networkExt = require "scripts.lib.network_ext"
-M.net = networkExt
+M.network = networkExt
 
 local screen = require "scripts.lib.screen"
 M.screen = screen
