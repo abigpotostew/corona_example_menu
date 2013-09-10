@@ -9,16 +9,27 @@ local radlib = require "scripts.lib.radlib"
 ---------------------------------------------------------------------------------
 local screen = nil
 
+local txtHeader = nil
 ---------------------------------------------------------------------------------
 -- END OF VARIABLE DECLARATIONS
 ---------------------------------------------------------------------------------
 
+local renderHeader = function( menu )
+  txtHeader = display.newText( menu.title, 10, 10, menu.theme.title.font, 28 )
+  txtHeader.x = 10 + txtHeader.width/2
+  txtHeader.y = 10 + txtHeader.height/2
+  local color = menu.theme.title.color
+  txtHeader:setTextColor( color.red, color.green, color.blue )
+  screen:insert( txtHeader )
+end
 
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
 function scene:createScene( event )
   screen = self.view
+
+  renderHeader( _G.menu )
 end
 
 function scene:enterScene( event )

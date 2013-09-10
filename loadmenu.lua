@@ -41,7 +41,7 @@ function initializeGame()
 
   copyStarterContentIfNeeded()
 
-  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )    
+  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
 end
 
 function scene:createScene( event )
