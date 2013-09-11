@@ -8,6 +8,8 @@ local radlib = require("scripts.lib.radlib")
 ---------------------------------------------------------------------------------
 local DOWNLOAD_BASE_URL = "https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/"
 local screen = nil
+local downloadedImages = 0
+local imagesToDownload = 0
 
 local copyStarterContentIfNeeded = function()
   -- copy the files only if the app.json file does not exist
@@ -40,7 +42,27 @@ local showMenu = function()
   storyboard.gotoScene( "menu" )
 end
 
+local flagImageDownloadDone = function( event )
+  if "ended" == event.phase then
+    downloadedImages = downloadedImages + 1
+    print( "Downloaded an image! Total images downloaded: " .. downloadedImages )
+    local percentDone = math.ceil( 100 * downloadedImages / imagesToDownload )
+    print( "Percent done: " .. percentDone .. "%" )
+    if downloadedImages >= imagesToDownload then
+      showMenu()
+    end
+  end
+end
+
 local downloadUpatedImages = function( updatedImages )
+  downloadedImages = 0
+  imagesToDownload = #updatedImages
+  local url = ''
+  for i, imageFilename in ipairs(updatedImages) do
+    url = DOWNLOAD_BASE_URL .. "images/" .. imageFilename
+    print("Downloading " .. url)
+    network.download( url, "GET", flagImageDownloadDone, {}, imageFilename, system.DocumentsDirectory )
+  end
 end
 
 local appJsonDownloadDoneListener = function( event )
