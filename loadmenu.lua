@@ -35,9 +35,26 @@ local copyStarterContentIfNeeded = function()
   end
 end
 
+local appJsonDownloadDoneListener = function( event )
+  if ( "ended" == event.phase ) then
+    print("Done downloading latest app.json")
+
+    local newAppJson = radlib.io.parseJson( system.pathForFile( "app.json", system.TemporaryDirectory ) )
+    local currentAppJson = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+    print("New version: " .. newAppJson.version )
+    print("Old version: " .. currentAppJson.version )
+    if newAppJson.version ~= currentAppJson.version then
+      print("New version!")
+      radlib.io.copyFile( "app.json", system.TemporaryDirectory, "app.json", system.DocumentsDirectory )
+      downloadUpatedImages( newAppJson.updatedImages )
+    else
+      showMenu()
+    end
+  end
+end
+
 local downloadUpdates = function( url )
-  print( "Downloading from " .. url )
-  storyboard.gotoScene( "menu" )
+  network.download( url, "GET", appJsonDownloadDoneListener, {}, "app.json", system.TemporaryDirectory )
 end
 
 function initializeGame()
