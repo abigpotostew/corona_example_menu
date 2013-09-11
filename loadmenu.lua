@@ -35,6 +35,14 @@ local copyStarterContentIfNeeded = function()
   end
 end
 
+local showMenu = function()
+  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+  storyboard.gotoScene( "menu" )
+end
+
+local downloadUpatedImages = function( updatedImages )
+end
+
 local appJsonDownloadDoneListener = function( event )
   if ( "ended" == event.phase ) then
     print("Done downloading latest app.json")
