@@ -89,7 +89,6 @@ function scene:createScene( event )
 end
 
 function scene:enterScene( event )
-  print("Start loaded...")
 end
 
 function scene:exitScene( event )
