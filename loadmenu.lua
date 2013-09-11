@@ -1,5 +1,6 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local widget = require( "widget" )
 
 local radlib = require("scripts.lib.radlib")
 
@@ -48,6 +49,7 @@ local flagImageDownloadDone = function( event )
     print( "Downloaded an image! Total images downloaded: " .. downloadedImages )
     local percentDone = math.ceil( 100 * downloadedImages / imagesToDownload )
     print( "Percent done: " .. percentDone .. "%" )
+    progressWidget:setProgress( downloadedImages / imagesToDownload )
     if downloadedImages >= imagesToDownload then
       showMenu()
     end
@@ -84,6 +86,10 @@ local appJsonDownloadDoneListener = function( event )
 end
 
 local downloadUpdates = function( url )
+  progressWidget = widget.newProgressView({
+    left = 100, top = 450, width = 568, isAnimated = true
+  })
+  screen:insert( progressWidget )
   network.download( url, "GET", appJsonDownloadDoneListener, {}, "app.json", system.TemporaryDirectory )
 end
 
