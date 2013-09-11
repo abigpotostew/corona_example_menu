@@ -42,6 +42,7 @@ function initializeGame()
   copyStarterContentIfNeeded()
 
   _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+  storyboard.gotoScene( "menu" )
 end
 
 function scene:createScene( event )
@@ -52,13 +53,7 @@ function scene:createScene( event )
   loadingImage.y = display.contentHeight/2
   screen:insert(loadingImage)
 
-  local gotoMainMenu = function()
-    storyboard.gotoScene( "menu" )
-  end
-
   initializeGame()
-
-  local loadMenuTimer = timer.performWithDelay( 1000, gotoMainMenu, 1 )
 end
 
 function scene:enterScene( event )

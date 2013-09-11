@@ -30,10 +30,10 @@ function scene:createScene( event )
   screen = self.view
 
   renderHeader( _G.menu )
+  renderSections( _G.menu.theme, _G.menu.sections )
 end
 
 function scene:enterScene( event )
-  print("Start loaded...")
 end
 
 function scene:exitScene( event )
