@@ -6,6 +6,7 @@ local radlib = require("scripts.lib.radlib")
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
+local DOWNLOAD_BASE_URL = "https://raw.github.com/radamanthus/corona_example_menu/master/starter_content/"
 local screen = nil
 
 local copyStarterContentIfNeeded = function()
@@ -34,6 +35,11 @@ local copyStarterContentIfNeeded = function()
   end
 end
 
+local downloadUpdates = function( url )
+  print( "Downloading from " .. url )
+  storyboard.gotoScene( "menu" )
+end
+
 function initializeGame()
   require 'init_buttons'
 
@@ -41,8 +47,14 @@ function initializeGame()
 
   copyStarterContentIfNeeded()
 
-  _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
-  storyboard.gotoScene( "menu" )
+  if radlib.network.hasNetworkConnection( 'www.github.com', 80 ) then
+    print( "Network connection detected, checking for updates..." )
+    downloadUpdates( DOWNLOAD_BASE_URL .. 'app.json' )
+  else
+    print( "No network, using locally cached content..." )
+    _G.menu = radlib.io.parseJson( system.pathForFile( "app.json", system.DocumentsDirectory ) )
+    storyboard.gotoScene( "menu" )
+  end
 end
 
 function scene:createScene( event )
