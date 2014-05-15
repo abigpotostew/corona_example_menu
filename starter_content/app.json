@@ -1,22 +1,27 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedImages": [
     "croissants_thumbnail.png",
-    "croissants.png"
+    "croissants.png",
+    "fish_soup_thumbnail.png",
+    "instant_miso_soup_thumbnail.png",
+    "steak_tatar_thumbnail.png",
+    "sunday_roast_beef_thumbnail.png",
+    "sunday_roast_beef.png"
   ],
   "theme": {
     "title": {
       "color": {
-        "red": 192,
-        "green": 128,
-        "blue": 192
+        "red": 200,
+        "green": 17,
+        "blue": 29
       },
       "font": "AmericanTypewriter-Bold",
     },
     "body": {
       "color": {
-        "red": 192,
-        "green": 128,
+        "red": 15,
+        "green": 50,
         "blue": 192
       },
       "font": "AmericanTypewriter-Condensed",
@@ -29,7 +34,7 @@
       "items": [
         {
           "title": "Croissant",
-          "price": 149.00,
+          "price": 9001.00,
           "description": "Hard to pronounce properly, but very tasty.",
           "thumbnail": {
             "filename": "croissants_thumbnail.png",
@@ -44,7 +49,7 @@
         },
         {
           "title": "Sushi",
-          "price": 50.00,
+          "price": 9001.00,
           "description": "Goes well with Miso soup",
           "thumbnail": {
             "filename": "sushi_thumbnail.png",
